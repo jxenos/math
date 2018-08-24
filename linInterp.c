@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <errno.h>
 
+//https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html#Argument-Syntax
+
 int main(int argc, char** argv){
 	float x[] = {1,100,200,300,450,600,800,1000,1300,1600};
 	float y[] = {550,509.5,468,437,398,361.5,331,297,265.5,236};
