@@ -17,6 +17,14 @@ typedef struct coords
 
 double linear_inter(Coords *coords, double input)
 {
+
+	int c;
+
+	for (c = 0; c < 10; c++)
+	{
+		printf("%f %f\n", coords[c].x, coords[c].y);
+	}
+
 	printf("input: %f\n", input);
 	float length = sizeof(coords) / sizeof(coords[0]);
 	double output;
