@@ -9,12 +9,12 @@ typedef struct coords
 	double y;
 } Coords;
 
-double linear_inter(Coords *, double input)
+double linear_inter(Coords *coords, double input)
 {
-	float length = sizeof(x) / sizeof(*x);
+	float length = sizeof(coords->x) / sizeof(coords->*x);
 	double output;
 
-	if (input < x[0] || input > x[(int)length - 1])
+	if (input < coords->x[0] || input > coords->x[(int)length - 1])
 	{
 		printf("Error: Outside bounds\n");
 		return 1;
@@ -23,14 +23,14 @@ double linear_inter(Coords *, double input)
 	int i;
 	for (i = 0; i < length; i++)
 	{
-		if (input == x[i])
+		if (input == coords->x[i])
 		{
-			output = y[i];
+			output = coords->y[i];
 			break;
 		}
-		if (input < x[i])
+		if (input < coords->x[i])
 		{
-			output = (y[i] - y[i - 1]) * (input - x[i - 1]) / (x[i] - x[i - 1]) + y[i - 1];
+			output = (coords->y[i] - coords->y[i - 1]) * (input - coords->x[i - 1]) / (coords->x[i] - coords->x[i - 1]) + coords->y[i - 1];
 			break;
 		}
 	}
