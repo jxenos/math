@@ -18,18 +18,18 @@ typedef struct coords
 double linear_inter(Coords *coords, double input)
 {
 
-	int c;
-
-	for (c = 0; c < 10; c++)
+	int c = 0;
+	while (coords[c].x != NULL)
 	{
-		printf("%f %f\n", coords[c].x, coords[c].y);
+		c++;
 	}
+	int length = c - 1;
 
 	printf("input: %f\n", input);
 
-	printf("coords: %d\n *coords: %d\ncoords[0]: %d\n", sizeof(coords), sizeof(*coords), sizeof(coords[0]));
+	printf("length: %d", c);
 
-	float length = sizeof(coords) / sizeof(coords[0]);
+	//float length = sizeof(coords) / sizeof(coords[0]);
 	double output;
 	printf("length: %f\n", length);
 	printf("0.x: %f, last.x: %f\n", coords[0].x, coords[(int)length - 1].x);
@@ -111,6 +111,7 @@ Coords *csv_parser(char *csv_file)
 	coords[7].x = 1000;
 	coords[8].x = 1300;
 	coords[9].x = 1600;
+	coords[10].x = NULL;
 
 	coords[0].y = 550;
 	coords[1].y = 509.5;
@@ -122,6 +123,7 @@ Coords *csv_parser(char *csv_file)
 	coords[7].y = 297;
 	coords[8].y = 265.5;
 	coords[9].y = 236;
+	coords[10].y = NULL;
 
 	return coords;
 }
