@@ -15,10 +15,8 @@ typedef struct coords
 	double y;
 } Coords;
 
-typedef
 
-	double
-	linear_inter(Coords *coords, double input)
+double linear_inter(Coords *coords, double input)
 {
 
 	int c = 0;
@@ -138,7 +136,7 @@ int main(int argc, char **argv)
 
 	int c;
 
-	while ((c = getopt(argc, argv, "c:i:")) != -1)
+	while ((c = getopt(argc, argv, "i:c:")) != -1)
 	{
 		switch (c)
 		{
@@ -146,7 +144,7 @@ int main(int argc, char **argv)
 			strcpy(camera_config, optarg);
 			break;
 		case 'i':
-			atof(optarg);
+			input = atof(optarg);
 			break;
 		case '?':
 			if (optopt == 'c')
