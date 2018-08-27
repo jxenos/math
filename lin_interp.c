@@ -23,13 +23,12 @@ double linear_inter(Coords *coords, double input)
 	{
 		c++;
 	}
-	int length = c - 1;
+	int length = c;
 
 	printf("input: %f\n", input);
 
 	printf("length: %d", c);
 
-	//float length = sizeof(coords) / sizeof(coords[0]);
 	double output;
 	printf("length: %f\n", length);
 	printf("0.x: %f, last.x: %f\n", coords[0].x, coords[(int)length - 1].x);
@@ -171,14 +170,7 @@ int main(int argc, char **argv)
 
 	printf("c: %s\ni: %f\n", camera_config, input);
 
-	Coords *coords = csv_parser("camera_data.cfg");
-
-	int x;
-
-	for (x = 0; x < 10; x++)
-	{
-		printf("%f %f\n", coords[x].x, coords[x].y);
-	}
+	Coords *coords = csv_parser(camera_config);
 
 	double output = linear_inter(coords, input);
 
