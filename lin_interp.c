@@ -85,9 +85,10 @@ Coords *csv_parser(char *csv_file)
 
 	Coords *coords = malloc(sizeof(Coords) * 10);
 
-	coords[1].x = 1;
-	coords[2].x = 100;
-	coords[3].x = 200;
+	coords[0].x = 1;
+	coords[1].x = 100;
+	coords[2].x = 200;
+	coords[3].x = 300;
 	coords[4].x = 450;
 	coords[5].x = 600;
 	coords[6].x = 800;
@@ -95,13 +96,14 @@ Coords *csv_parser(char *csv_file)
 	coords[8].x = 1300;
 	coords[9].x = 1600;
 
-	coords[1].y = 550;
-	coords[2].y = 509.5;
-	coords[3].y = 468;
-	coords[4].y = 437;
-	coords[5].y = 398;
-	coords[6].y = 361;
-	coords[7].y = 331;
+	coords[0].y = 550;
+	coords[1].y = 509.5;
+	coords[2].y = 468;
+	coords[3].y = 437;
+	coords[4].y = 398;
+	coords[5].y = 361;
+	coords[6].y = 331;
+	coords[7].y = 297;
 	coords[8].y = 265.5;
 	coords[9].y = 236;
 
