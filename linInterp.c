@@ -3,7 +3,16 @@
 
 //https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html#Argument-Syntax
 
+typedef struct cords {
+	double x;
+	double y;
+} Cords;
 int main(int argc, char** argv){
+	int length = 10;
+	Cords cords[length];
+	int i;
+	for (i = 0; i < length; i++){
+	}
 	float x[] = {1,100,200,300,450,600,800,1000,1300,1600};
 	float y[] = {550,509.5,468,437,398,361.5,331,297,265.5,236};
 
