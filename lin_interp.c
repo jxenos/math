@@ -83,7 +83,7 @@ Coords *csv_parser(char *csv_file)
 	}
 	fclose(in);
 
-	Cords *coords = malloc(sizeof(Cords) * 10);
+	Coords *coords = malloc(sizeof(Coords) * 10);
 
 	coords[1].x = 1;
 	coords[2].x = 100;
