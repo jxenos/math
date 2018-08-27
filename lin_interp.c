@@ -1,5 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <errno.h>
+
+#define MAXFLDS 200   /* maximum possible number of fields */
+#define MAXFLDSIZE 32 /* longest possible field + 1 = 31 byte field */
 
 //https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html#Argument-Syntax
 
@@ -38,10 +43,6 @@ double linear_inter(Coords *coords, double input)
 	return output;
 };
 
-#include <stdlib.h>
-#include <string.h>
-#define MAXFLDS 200   /* maximum possible number of fields */
-#define MAXFLDSIZE 32 /* longest possible field + 1 = 31 byte field */
 void parse(char *record, char *delim, char arr[][MAXFLDSIZE], int *fldcnt)
 {
 	char *p = strtok(record, delim);
@@ -81,7 +82,30 @@ Coords *csv_parser(char *csv_file)
 		}
 	}
 	fclose(in);
-	return 0;
+
+	Cords *coords = malloc(sizeof(Cords) * 10);
+
+	coords[1].x = 1;
+	coords[2].x = 100;
+	coords[3].x = 200;
+	coords[4].x = 450;
+	coords[5].x = 600;
+	coords[6].x = 800;
+	coords[7].x = 1000;
+	coords[8].x = 1300;
+	coords[9].x = 1600;
+
+	coords[1].y = 550;
+	coords[2].y = 509.5;
+	coords[3].y = 468;
+	coords[4].y = 437;
+	coords[5].y = 398;
+	coords[6].y = 361;
+	coords[7].y = 331;
+	coords[8].y = 265.5;
+	coords[9].y = 236;
+
+	return coords;
 }
 
 int main(int argc, char **argv)
