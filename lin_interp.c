@@ -19,7 +19,7 @@ double linear_inter(Coords *coords, double input)
 {
 
 	int c = 0;
-	while (coords[c].x != NULL)
+	while (coords[c].x > 0)
 	{
 		c++;
 	}
@@ -110,7 +110,7 @@ Coords *csv_parser(char *csv_file)
 	coords[7].x = 1000;
 	coords[8].x = 1300;
 	coords[9].x = 1600;
-	coords[10].x = NULL;
+	coords[10].x = -1;
 
 	coords[0].y = 550;
 	coords[1].y = 509.5;
@@ -122,7 +122,7 @@ Coords *csv_parser(char *csv_file)
 	coords[7].y = 297;
 	coords[8].y = 265.5;
 	coords[9].y = 236;
-	coords[10].y = NULL;
+	coords[10].y = -1;
 
 	return coords;
 }
