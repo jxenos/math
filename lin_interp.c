@@ -115,11 +115,18 @@ int main(int argc, char **argv)
 
 	Coords *coords = csv_parser("camera_data.cfg");
 
+	int x;
+
+	for (x = 0; x < 10; x++)
+	{
+		printf("%f %f\n", coords[x].x, coords[x].y);
+	}
+
 	double input = 0;
 
 	double output = linear_inter(coords, input);
 
-	printf("%f", output);
+	printf("%f\n", output);
 
 	return 0;
 }
