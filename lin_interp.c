@@ -117,6 +117,45 @@ int main(int argc, char **argv)
 {
 	//float x[] = {1, 100, 200, 300, 450, 600, 800, 1000, 1300, 1600};
 	//float y[] = {550, 509.5, 468, 437, 398, 361.5, 331, 297, 265.5, 236};
+	char *camera_config;
+	double input;
+
+	int c;
+
+	while ((c = getopt(argc, arv, "c:i:")) != -1)
+	{
+		switch (c)
+		{
+		case 'c':
+			strcpy(camera_config, optarg);
+			break;
+		case 'i':
+			input = optarg;
+			break;
+		case '?':
+			if (optopt == 'c')
+			{
+				fprintf(stderr, "Option -%c requires an argument.\n", optopt);
+			}
+			else if (optopt == "i")
+			{
+				fprintf(stderr, "Option -%i requires an argument.\n", optopt);
+			}
+			else if (isprint(optopt))
+			{
+				fprintf(stderr, "Unkown option '-%c'.\n", optopt);
+			}
+			else
+			{
+				fprintf(stderr, "Unknown option character '\\x%x'.\n", optopt);
+			}
+			return 1;
+		default:
+			abort();
+		}
+	}
+
+	printf("c: %s\ni: %f\n", camera_config, input);
 
 	Coords *coords = csv_parser("camera_data.cfg");
 
@@ -126,8 +165,6 @@ int main(int argc, char **argv)
 	{
 		printf("%f %f\n", coords[x].x, coords[x].y);
 	}
-
-	double input = 3;
 
 	double output = linear_inter(coords, input);
 
