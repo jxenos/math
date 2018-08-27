@@ -26,6 +26,9 @@ double linear_inter(Coords *coords, double input)
 	}
 
 	printf("input: %f\n", input);
+
+	printf("coords: %d\n *coords: %d\ncoords[0]: %d\n", sizeof(coords), sizeof(*coords), sizeof(coords[0]));
+
 	float length = sizeof(coords) / sizeof(coords[0]);
 	double output;
 	printf("length: %f\n", length);
