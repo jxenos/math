@@ -117,7 +117,9 @@ int main(int argc, char **argv)
 
 	double input = 0;
 
-	linear_inter(coords, input);
+	double output = linear_inter(coords, input);
+
+	printf("%f", output);
 
 	return 0;
 }
