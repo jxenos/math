@@ -16,8 +16,11 @@ typedef struct coords
 
 double linear_inter(Coords *coords, double input)
 {
+	printf("input: %f\n", input);
 	float length = sizeof(coords) / sizeof(*coords);
 	double output;
+	printf("length: %f\n", length);
+	printf("0.x: %f, last.x: %f\n", coords[0].x, coords[(int)length -1].x);
 
 	if (input < coords[0].x || input > coords[(int)length - 1].x)
 	{
@@ -124,7 +127,7 @@ int main(int argc, char **argv)
 		printf("%f %f\n", coords[x].x, coords[x].y);
 	}
 
-	double input = 0;
+	double input = 3;
 
 	double output = linear_inter(coords, input);
 
