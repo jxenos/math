@@ -14,7 +14,7 @@ double linear_inter(Coords *coords, double input)
 	float length = sizeof(coords) / sizeof(*coords);
 	double output;
 
-	if (input < coords[0]->x || input > coords[(int)length - 1]->x)
+	if (input < coords[0].x || input > coords[(int)length - 1].x)
 	{
 		printf("Error: Outside bounds\n");
 		return 1;
@@ -23,14 +23,14 @@ double linear_inter(Coords *coords, double input)
 	int i;
 	for (i = 0; i < length; i++)
 	{
-		if (input == coords[i]->x)
+		if (input == coords[i].x)
 		{
-			output = coords[i]->y;
+			output = coords[i].y;
 			break;
 		}
-		if (input < coords[i]->x)
+		if (input < coords[i].x)
 		{
-			output = (coords[i]->y - coords[i - 1]->y) * (input - coords[i-1]->x]) / (coords[i]->x - coords[i-1]->x) + coords[i-1]->y;
+			output = (coords[i].y - coords[i - 1].y) * (input - coords[i - 1].x) / (coords[i].x - coords[i - 1].x) + coords[i - 1].y;
 			break;
 		}
 	}
