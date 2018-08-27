@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 
 #define MAXFLDS 200   /* maximum possible number of fields */
 #define MAXFLDSIZE 32 /* longest possible field + 1 = 31 byte field */
@@ -122,7 +123,7 @@ int main(int argc, char **argv)
 
 	int c;
 
-	while ((c = getopt(argc, arv, "c:i:")) != -1)
+	while ((c = getopt(argc, argv, "c:i:")) != -1)
 	{
 		switch (c)
 		{
@@ -130,14 +131,14 @@ int main(int argc, char **argv)
 			strcpy(camera_config, optarg);
 			break;
 		case 'i':
-			input = optarg;
+			sscanf(optarg, "%lf", input);
 			break;
 		case '?':
 			if (optopt == 'c')
 			{
 				fprintf(stderr, "Option -%c requires an argument.\n", optopt);
 			}
-			else if (optopt == "i")
+			else if (optopt == 'i')
 			{
 				fprintf(stderr, "Option -%i requires an argument.\n", optopt);
 			}
