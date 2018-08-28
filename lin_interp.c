@@ -141,9 +141,9 @@ int main(int argc, char **argv)
 		switch (c)
 		{
 		case 'c':
-			camera_config = strdup(optarg)
-				//strcpy(camera_config, optarg);
-				break;
+			camera_config = strdup(optarg);
+			//strcpy(camera_config, optarg);
+			break;
 		case 'i':
 			input = atof(optarg);
 			break;
