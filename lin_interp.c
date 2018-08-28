@@ -28,7 +28,6 @@ double linear_inter(Coords_Array coords_array, double input)
 	int length = coords_array.length;
 
 	printf("input: %f\n", input);
-	printf("length: %d", c);
 
 	double output;
 	printf("length: %f\n", length);
@@ -72,7 +71,7 @@ void parse(char *record, char *delim, char arr[][MAXFLDSIZE], int *fldcnt)
 	*fldcnt = fld;
 }
 
-Coords_Array *csv_parser(char *csv_file)
+Coords_Array csv_parser(char *csv_file)
 {
 	char tmp[1024] = {0x0};
 	int fldcnt = 0;
@@ -122,9 +121,9 @@ Coords_Array *csv_parser(char *csv_file)
 	coords[8].y = 265.5;
 	coords[9].y = 236;
 
-	Coords_Array coords_array = coords, 10;
+	Coords_Array coords_array = {.coords_array = coords, .length = 10};
 
-	return coords;
+	return coords_array;
 }
 
 int main(int argc, char **argv)
@@ -169,9 +168,9 @@ int main(int argc, char **argv)
 
 	printf("c: %s\ni: %f\n", camera_config, input);
 
-	Coords *coords = csv_parser(camera_config);
+	Coords_Array coords_array = csv_parser(camera_config);
 
-	double output = linear_inter(coords, input);
+	double output = linear_inter(coords_array, input);
 
 	printf("%f\n", output);
 
