@@ -131,7 +131,7 @@ int main(int argc, char **argv)
 {
 	//float x[] = {1, 100, 200, 300, 450, 600, 800, 1000, 1300, 1600};
 	//float y[] = {550, 509.5, 468, 437, 398, 361.5, 331, 297, 265.5, 236};
-	char *camera_config;
+	char *camera_config = NULL;
 	double input;
 
 	int c;
@@ -141,8 +141,9 @@ int main(int argc, char **argv)
 		switch (c)
 		{
 		case 'c':
-			strcpy(camera_config, optarg);
-			break;
+			camera_config = strdup(optarg)
+				//strcpy(camera_config, optarg);
+				break;
 		case 'i':
 			input = atof(optarg);
 			break;
