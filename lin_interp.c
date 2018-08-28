@@ -15,29 +15,29 @@ typedef struct coords
 	double y;
 } Coords;
 
+typedef struct coords_array
+{
+	Coords *coords_array;
+	int length;
+} Coords_Array;
 
-double linear_inter(Coords *coords, double input)
+double linear_inter(Coords_Array coords_array, double input)
 {
 
-	int c = 0;
-	while (coords[c].x > 0)
-	{
-		c++;
-	}
-	int length = c;
+	Coords *coords = coords_array.coords_array;
+	int length = coords_array.length;
 
 	printf("input: %f\n", input);
-
 	printf("length: %d", c);
 
 	double output;
 	printf("length: %f\n", length);
-	printf("0.x: %f, last.x: %f\n", coords[0].x, coords[(int)length - 1].x);
+	printf("0.x: %f, last.x: %f\n", coords[0].x, coords[length - 1].x);
 
-	if (input < coords[0].x || input > coords[(int)length - 1].x)
+	if (input < coords[0].x || input > coords[length - 1].x)
 	{
-		printf("Error: Outside bounds\n");
-		return 1;
+		fprintf(stderr, "Error: Outside bounds\n");
+		exit(0);
 	}
 
 	int i;
@@ -72,7 +72,7 @@ void parse(char *record, char *delim, char arr[][MAXFLDSIZE], int *fldcnt)
 	*fldcnt = fld;
 }
 
-Coords *csv_parser(char *csv_file)
+Coords_Array *csv_parser(char *csv_file)
 {
 	char tmp[1024] = {0x0};
 	int fldcnt = 0;
@@ -110,7 +110,6 @@ Coords *csv_parser(char *csv_file)
 	coords[7].x = 1000;
 	coords[8].x = 1300;
 	coords[9].x = 1600;
-	coords[10].x = -1;
 
 	coords[0].y = 550;
 	coords[1].y = 509.5;
@@ -122,15 +121,14 @@ Coords *csv_parser(char *csv_file)
 	coords[7].y = 297;
 	coords[8].y = 265.5;
 	coords[9].y = 236;
-	coords[10].y = -1;
+
+	Coords_Array coords_array = coords, 10;
 
 	return coords;
 }
 
 int main(int argc, char **argv)
 {
-	//float x[] = {1, 100, 200, 300, 450, 600, 800, 1000, 1300, 1600};
-	//float y[] = {550, 509.5, 468, 437, 398, 361.5, 331, 297, 265.5, 236};
 	char *camera_config = NULL;
 	double input;
 
@@ -142,7 +140,6 @@ int main(int argc, char **argv)
 		{
 		case 'c':
 			camera_config = strdup(optarg);
-			//strcpy(camera_config, optarg);
 			break;
 		case 'i':
 			input = atof(optarg);
