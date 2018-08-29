@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 
 	int c;
 
-	while ((c = getopt(argc, argv, "i:c:")) != -1)
+	while ((c = getopt(argc, argv, ":i:c:?")) != -1)
 	{
 		switch (c)
 		{
@@ -138,6 +138,9 @@ int main(int argc, char **argv)
 			input = atof(optarg);
 			break;
 		case '?':
+			fprint("you need help man");
+			break;
+		case ':':
 			if (optopt == 'c')
 			{
 				fprintf(stderr, "Option -%c requires an argument.\n", optopt);
