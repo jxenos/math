@@ -106,8 +106,6 @@ static Coords_Array csv_parser(char *csv_file)
 		rows[i++] = temp;
 	}
 
-	//free(file_data);
-
 	for (i = 0; i < rowcnt; i++)
 	{
 		temp = strtok(rows[i], delimiter);
@@ -116,6 +114,7 @@ static Coords_Array csv_parser(char *csv_file)
 		data[i].y = atof(temp);
 	}
 
+	free(file_data);
 	free(rows);
 
 	return (Coords_Array){.coords_array = data, .length = rowcnt};
