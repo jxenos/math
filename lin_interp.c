@@ -124,6 +124,8 @@ int main(int argc, char **argv)
 {
 	char *camera_config = NULL;
 	double input;
+	int input_set = 0;
+	int help = 0;
 
 	int c;
 
@@ -136,9 +138,10 @@ int main(int argc, char **argv)
 			break;
 		case 'i':
 			input = atof(optarg);
+			input_set = 1;
 			break;
 		case '?':
-			printf("you need help man");
+			help = 1;
 			break;
 		case ':':
 			if (optopt == 'c')
@@ -163,11 +166,20 @@ int main(int argc, char **argv)
 		}
 	}
 
-	Coords_Array coords_array = csv_parser(camera_config);
+	if(help || argc == 1){
+		printf("you need help man\n");
+	} else if(camera_config != NULL && input_set == 1){
+		Coords_Array coords_array = csv_parser(camera_config);
 
-	double output = linear_inter(coords_array, input);
+		double output = linear_inter(coords_array, input);
 
-	printf("%f\n", output);
-
+		printf("%f\n", output);
+	} else if (camera_config == NULL) {
+		fprintf(stderr, "You must pass a csv file\n");
+	} else if (input_set == 0){
+		fprintf(stderr, "You must pass a target number\n");
+	} else {
+		fprintf(stderr, "An unknown error has occured\n");
+	}
 	return 0;
 }
