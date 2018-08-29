@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 			}
 			else if (optopt == 'i')
 			{
-				fprintf(stderr, "Option -%i requires an argument.\n", optopt);
+				fprintf(stderr, "Option -%c requires an argument.\n", optopt);
 			}
 			else if (isprint(optopt))
 			{
