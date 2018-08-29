@@ -138,7 +138,7 @@ int main(int argc, char **argv)
 			input = atof(optarg);
 			break;
 		case '?':
-			fprint("you need help man");
+			printf("you need help man");
 			break;
 		case ':':
 			if (optopt == 'c')
