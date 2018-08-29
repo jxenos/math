@@ -4,11 +4,6 @@
 #include <errno.h>
 #include <unistd.h>
 
-#define MAXFLDS 200   /* maximum possible number of fields */
-#define MAXFLDSIZE 32 /* longest possible field + 1 = 31 byte field */
-
-//https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html#Argument-Syntax
-
 typedef struct coords
 {
 	double x;
@@ -31,18 +26,9 @@ double linear_inter(Coords_Array coords_array, double input)
 	Coords *coords = coords_array.coords_array;
 	int length = coords_array.length;
 
-	qsort((void*)coords, length, sizeof(*coords), compare);
-
-	//printf("input: %f\n", input);
+	qsort((void *)coords, length, sizeof(*coords), compare);
 
 	double output;
-	//printf("length: %d\n", length);
-	//printf("0.x: %f, last.x: %f\n", coords[0].x, coords[length - 1].x);
-	int i;
-	for (i = 0; i < length; i++)
-	{
-		printf("%d: x: %f y: %f\n", i, coords[i].x, coords[i].y);
-	}
 
 	if (input < coords[0].x || input > coords[length - 1].x)
 	{
@@ -50,7 +36,7 @@ double linear_inter(Coords_Array coords_array, double input)
 		exit(0);
 	}
 
-	//int i;
+	int i;
 	for (i = 0; i < length; i++)
 	{
 		if (input == coords[i].x)
@@ -165,8 +151,6 @@ int main(int argc, char **argv)
 			abort();
 		}
 	}
-
-	//printf("c: %s\ni: %f\n", camera_config, input);
 
 	Coords_Array coords_array = csv_parser(camera_config);
 
