@@ -85,9 +85,9 @@ Coords_Array csv_parser(char *csv_file)
 
 	// go to the end of the file to get length
 	fseek(file, 0x0, SEEK_END);
-	unsigned file_length = ftell(f);
+	unsigned file_length = ftell(file);
 
-	fseek(f, 0x0, SEEK_SET);
+	fseek(file, 0x0, SEEK_SET);
 
 	//clear a memory block to store the file data in
 	char *file_data = malloc(file_length + 1);
@@ -97,12 +97,13 @@ Coords_Array csv_parser(char *csv_file)
 	fread(file_data, 1, file_length, file);
 	fclose(file);
 
-	char delimiter = ',';
+	char *delimiter = ",";
 	unsigned rowcnt = 0;
 	int i = file_length;
 	while (i--)
 	{
-		if (file_data[i] == delimiter)
+		//	if (file_data[i] == delimiter)
+		if (file_data[i] == ',')
 			rowcnt++;
 	}
 
@@ -111,14 +112,24 @@ Coords_Array csv_parser(char *csv_file)
 
 	Coords *data = malloc(sizeof(Coords) * rowcnt);
 	memset(data, 0, sizeof(Coords) * rowcnt);
-
+	char *temp;
+	char *temp2;
+	i = 0;
+	for(*temp = strtok(*file_data, "\n"); temp != NULL; temp = strtok(NULL, "\n")){
+		*temp2 = strtok(*temp, delimiter);
+		data[i].x = atof(*temp2);
+		*temp2 = strtok(NULL, delimiter);
+		data[i].y = atof(*temp2);
+		i++;
+	}
+/*
 	for (i = 0; i < rowcnt; i++)
 	{
-		temp = strtok(file_data, '\n');
-		data[i].x = strtok(temp, delimiter);
-		data[i].y = temp;
+		temp = strtok(*file_data, "\n");
+		data[i].x = atof(strtok(*temp, delimiter));
+		data[i].y = atof(*temp);
 	}
-
+*/
 	//======================================================================
 	/*
 		char tmp[1024] = {0x0};
