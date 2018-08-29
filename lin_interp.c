@@ -31,7 +31,7 @@ double linear_inter(Coords_Array coords_array, double input)
 	Coords *coords = coords_array.coords_array;
 	int length = coords_array.length;
 
-	qsort(*coords, length, sizeof(*coords), compare);
+	qsort((void*)coords, length, sizeof(*coords), compare);
 
 	//printf("input: %f\n", input);
 
@@ -39,7 +39,7 @@ double linear_inter(Coords_Array coords_array, double input)
 	//printf("length: %d\n", length);
 	//printf("0.x: %f, last.x: %f\n", coords[0].x, coords[length - 1].x);
 	int i;
-	for (i = 0; i < length; i++;)
+	for (i = 0; i < length; i++)
 	{
 		printf("%d: x: %f y: %f\n", i, coords[i].x, coords[i].y);
 	}
@@ -50,7 +50,7 @@ double linear_inter(Coords_Array coords_array, double input)
 		exit(0);
 	}
 
-	int i;
+	//int i;
 	for (i = 0; i < length; i++)
 	{
 		if (input == coords[i].x)
