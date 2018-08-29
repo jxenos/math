@@ -106,27 +106,38 @@ Coords_Array csv_parser(char *csv_file)
 			rowcnt++;
 	}
 
-	Coords *cords = malloc(sizeof())
+	//char **rows = malloc(sizeof(char*) * rowcnt);
+	//memset(rows, 0, sizeof(char*) * rowcnt);
 
-		//======================================================================
+	Coords *data = malloc(sizeof(Coords) * rowcnt);
+	memset(data, 0, sizeof(Coords) * rowcnt);
 
+	for (i = 0; i < rowcnt; i++)
+	{
+		temp = strtok(file_data, '\n');
+		data[i].x = strtok(temp, delimiter);
+		data[i].y = temp;
+	}
+
+	//======================================================================
+	/*
 		char tmp[1024] = {0x0};
 	int fldcnt = 0;
 	char arr[MAXFLDS][MAXFLDSIZE] = {0x0};
 
-	while (fgets(tmp, sizeof(tmp), in) != 0) /* read a record */
+	while (fgets(tmp, sizeof(tmp), in) != 0) // read a record
 	{
 		int i = 0;
 		rowcnt++;
 		printf("Record number: %d\n", rowcnt);
-		parse(tmp, ",", arr, &fldcnt); /* whack record into fields */
+		parse(tmp, ",", arr, &fldcnt); // whack record into fields
 		for (i = 0; i < fldcnt; i++)
-		{ /* print each field */
+		{ // print each field
 			printf("\tField number: %3d==%s\n", i, arr[i]);
 		}
 	}
 	fclose(in);
-
+*/
 	/*
 	Coords *coords = malloc(sizeof(Coords) * 11);
 
@@ -152,7 +163,7 @@ Coords_Array csv_parser(char *csv_file)
 	coords[8].y = 265.5;
 	coords[9].y = 236;*/
 
-	return (Coords_Array){.coords_array = data, .length = got};
+	return (Coords_Array){.coords_array = data, .length = rowcnt};
 }
 
 int main(int argc, char **argv)
