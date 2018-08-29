@@ -16,12 +16,12 @@ typedef struct coords_array
 	int length;
 } Coords_Array;
 
-int compare(const void *a, const void *b)
+static int compare(const void *a, const void *b)
 {
 	return ((Coords *)a)->x - ((Coords *)b)->x;
 }
 
-double linear_inter(Coords_Array coords_array, double input)
+static double linear_inter(Coords_Array coords_array, double input)
 {
 	Coords *coords = coords_array.coords_array;
 	int length = coords_array.length;
@@ -54,7 +54,7 @@ double linear_inter(Coords_Array coords_array, double input)
 	return output;
 };
 
-Coords_Array csv_parser(char *csv_file)
+static Coords_Array csv_parser(char *csv_file)
 {
 
 	FILE *file = fopen(csv_file, "r");
@@ -80,10 +80,10 @@ Coords_Array csv_parser(char *csv_file)
 	fread(file_data, 1, file_length, file);
 	fclose(file);
 
-	char *delimiter = ",";
+	static const char *delimiter = ",";
 	unsigned rowcnt = 0;
-	int i = file_length;
-	while (i--)
+	int i;
+	for (i = 0; i < file_length; i++)
 	{
 		if (file_data[i] == delimiter[0])
 			rowcnt++;
@@ -101,6 +101,8 @@ Coords_Array csv_parser(char *csv_file)
 		rows[i++] = temp;
 	}
 
+	free(file_data);
+
 	for (i = 0; i < rowcnt; i++)
 	{
 		temp = strtok(rows[i], delimiter);
@@ -108,6 +110,8 @@ Coords_Array csv_parser(char *csv_file)
 		temp = strtok(NULL, delimiter);
 		data[i].y = atof(temp);
 	}
+
+	free(rows);
 
 	return (Coords_Array){.coords_array = data, .length = rowcnt};
 }
