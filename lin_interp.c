@@ -103,26 +103,32 @@ Coords_Array csv_parser(char *csv_file)
 	while (i--)
 	{
 		//	if (file_data[i] == delimiter)
-		if (file_data[i] == ',')
+		if (file_data[i] == delimiter[0])
 			rowcnt++;
 	}
 
-	//char **rows = malloc(sizeof(char*) * rowcnt);
-	//memset(rows, 0, sizeof(char*) * rowcnt);
+	char **rows = malloc(sizeof(char *) * rowcnt);
+	memset(rows, 0, sizeof(char *) * rowcnt);
 
 	Coords *data = malloc(sizeof(Coords) * rowcnt);
 	memset(data, 0, sizeof(Coords) * rowcnt);
 	char *temp;
-	char *temp2;
 	i = 0;
-	for(*temp = strtok(*file_data, "\n"); temp != NULL; temp = strtok(NULL, "\n")){
-		*temp2 = strtok(*temp, delimiter);
-		data[i].x = atof(*temp2);
-		*temp2 = strtok(NULL, delimiter);
-		data[i].y = atof(*temp2);
-		i++;
+	for (*temp = strtok(*file_data, "\n"); temp != NULL; temp = strtok(NULL, "\n"))
+	{
+		rows[i] = temp;
+		i++
 	}
-/*
+
+	for (i = 0; i < rowcnt; i++)
+	{
+		*temp = strtok(*temp, *delimiter);
+		data[i].x = atof(*temp);
+		*temp = strtok(NULL, *delimiter);
+		data[i].y = atof(*temp);
+	}
+
+	/*
 	for (i = 0; i < rowcnt; i++)
 	{
 		temp = strtok(*file_data, "\n");
