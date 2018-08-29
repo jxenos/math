@@ -16,7 +16,7 @@ typedef struct coords_array
 	int length;
 } Coords_Array;
 
-int compare(const void *a, const void *b)
+static int compare(const void *a, const void *b)
 {
 	if (((Coords *)a)->x < ((Coords *)b)->x)
 		return -1;
@@ -26,7 +26,7 @@ int compare(const void *a, const void *b)
 		return 1;
 }
 
-double linear_inter(Coords_Array coords_array, double input)
+static double linear_inter(Coords_Array coords_array, double input)
 {
 	Coords *coords = coords_array.coords_array;
 	int length = coords_array.length;
@@ -59,7 +59,7 @@ double linear_inter(Coords_Array coords_array, double input)
 	return output;
 };
 
-Coords_Array csv_parser(char *csv_file)
+static Coords_Array csv_parser(char *csv_file)
 {
 
 	FILE *file = fopen(csv_file, "r");
