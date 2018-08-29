@@ -114,18 +114,17 @@ Coords_Array csv_parser(char *csv_file)
 	memset(data, 0, sizeof(Coords) * rowcnt);
 	char *temp;
 	i = 0;
-	for (*temp = strtok(*file_data, "\n"); temp != NULL; temp = strtok(NULL, "\n"))
+	for (temp = strtok(file_data, "\n"); temp != NULL; temp = strtok(NULL, "\n"))
 	{
-		rows[i] = temp;
-		i++
+		rows[i++] = temp;
 	}
 
 	for (i = 0; i < rowcnt; i++)
 	{
-		*temp = strtok(*temp, *delimiter);
-		data[i].x = atof(*temp);
-		*temp = strtok(NULL, *delimiter);
-		data[i].y = atof(*temp);
+		temp = strtok(rows[i], delimiter);
+		data[i].x = atof(temp);
+		temp = strtok(NULL, delimiter);
+		data[i].y = atof(temp);
 	}
 
 	/*
