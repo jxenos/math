@@ -18,7 +18,12 @@ typedef struct coords_array
 
 int compare(const void *a, const void *b)
 {
-	return ((Coords *)a)->x - ((Coords *)b)->x;
+	if (((Coords *)a)->x < ((Coords *)b)->x)
+		return -1;
+	if (((Coords *)a)->x == ((Coords *)b)->x)
+		return 0;
+	if (((Coords *)a)->x > ((Coords *)b)->x)
+		return 1;
 }
 
 double linear_inter(Coords_Array coords_array, double input)
