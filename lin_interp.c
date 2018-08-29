@@ -73,22 +73,52 @@ void parse(char *record, char *delim, char arr[][MAXFLDSIZE], int *fldcnt)
 
 Coords_Array csv_parser(char *csv_file)
 {
-	char tmp[1024] = {0x0};
-	int fldcnt = 0;
-	char arr[MAXFLDS][MAXFLDSIZE] = {0x0};
-	int recordcnt = 0;
-	FILE *in = fopen(csv_file, "r"); /* open file on command line */
 
-	if (in == NULL)
+	FILE *file = fopen(csv_file, "r");
+
+	//ensure we have a file or error
+	if (file == NULL)
 	{
 		perror("File open error");
 		exit(EXIT_FAILURE);
 	}
+
+	// go to the end of the file to get length
+	fseek(file, 0x0, SEEK_END);
+	unsigned file_length = ftell(f);
+
+	fseek(f, 0x0, SEEK_SET);
+
+	//clear a memory block to store the file data in
+	char *file_data = malloc(file_length + 1);
+	memset(file_data, 0x0, file_length + 1);
+
+	//copy the file into memory
+	fread(file_data, 1, file_length, file);
+	fclose(file);
+
+	char delimiter = ',';
+	unsigned rowcnt = 0;
+	int i = file_length;
+	while (i--)
+	{
+		if (file_data[i] == delimiter)
+			rowcnt++;
+	}
+
+	Coords *cords = malloc(sizeof())
+
+		//======================================================================
+
+		char tmp[1024] = {0x0};
+	int fldcnt = 0;
+	char arr[MAXFLDS][MAXFLDSIZE] = {0x0};
+
 	while (fgets(tmp, sizeof(tmp), in) != 0) /* read a record */
 	{
 		int i = 0;
-		recordcnt++;
-		printf("Record number: %d\n", recordcnt);
+		rowcnt++;
+		printf("Record number: %d\n", rowcnt);
 		parse(tmp, ",", arr, &fldcnt); /* whack record into fields */
 		for (i = 0; i < fldcnt; i++)
 		{ /* print each field */
@@ -97,6 +127,7 @@ Coords_Array csv_parser(char *csv_file)
 	}
 	fclose(in);
 
+	/*
 	Coords *coords = malloc(sizeof(Coords) * 11);
 
 	coords[0].x = 1;
@@ -119,11 +150,9 @@ Coords_Array csv_parser(char *csv_file)
 	coords[6].y = 331;
 	coords[7].y = 297;
 	coords[8].y = 265.5;
-	coords[9].y = 236;
+	coords[9].y = 236;*/
 
-	Coords_Array coords_array = {.coords_array = coords, .length = 10};
-
-	return coords_array;
+	return (Coords_Array){.coords_array = data, .length = got};
 }
 
 int main(int argc, char **argv)
