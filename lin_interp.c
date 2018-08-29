@@ -87,8 +87,8 @@ static Coords_Array csv_parser(char *csv_file)
 
 	static const char *delimiter = ",";
 	unsigned rowcnt = 0;
-	int i = file_length;
-	while (i--)
+	int i;
+	for (i = 0; i < file_length; i++)
 	{
 		if (file_data[i] == delimiter[0])
 			rowcnt++;
@@ -106,7 +106,7 @@ static Coords_Array csv_parser(char *csv_file)
 		rows[i++] = temp;
 	}
 
-	free(file_data);
+	//free(file_data);
 
 	for (i = 0; i < rowcnt; i++)
 	{
