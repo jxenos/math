@@ -24,6 +24,8 @@ static int compare(const void *a, const void *b)
 		return 0;
 	if (((Coords *)a)->x > ((Coords *)b)->x)
 		return 1;
+	fprintf(stderr, "Unknown Comparison");
+	exit(0);
 }
 
 static double linear_inter(Coords_Array coords_array, double input)
@@ -166,19 +168,28 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if(help || argc == 1){
+	if (help || argc == 1)
+	{
 		printf("you need help man\n");
-	} else if(camera_config != NULL && input_set == 1){
+	}
+	else if (camera_config != NULL && input_set == 1)
+	{
 		Coords_Array coords_array = csv_parser(camera_config);
 
 		double output = linear_inter(coords_array, input);
 
 		printf("%f\n", output);
-	} else if (camera_config == NULL) {
+	}
+	else if (camera_config == NULL)
+	{
 		fprintf(stderr, "You must pass a csv file\n");
-	} else if (input_set == 0){
+	}
+	else if (input_set == 0)
+	{
 		fprintf(stderr, "You must pass a target number\n");
-	} else {
+	}
+	else
+	{
 		fprintf(stderr, "An unknown error has occured\n");
 	}
 	return 0;
