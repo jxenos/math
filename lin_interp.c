@@ -95,7 +95,7 @@ static Coords_Array csv_parser(char *csv_file)
 
 	static const char *delimiter = ",";
 	unsigned rowcnt = 0;
-	int i;
+	unsigned i;
 	for (i = 0; i < file_length; i++)
 	{
 		if (file_data[i] == delimiter[0])
