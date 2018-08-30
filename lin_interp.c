@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <unistd.h>
+//#include <unistd.h>
+#include <getopt.h>
 #include <ctype.h>
 
 typedef struct coords
@@ -26,6 +27,12 @@ static int compare(const void *a, const void *b)
 
 	return 0;
 }
+
+static struct option long_options[] =
+	{
+		{"csv", required_argument, NULL, 'c'},
+		{"input", required_argument, NULL, 'i'},
+		{NULL, 0, NULL, 0}};
 
 static double linear_inter(Coords_Array coords_array, double input)
 {
@@ -130,7 +137,7 @@ int main(int argc, char **argv)
 
 	int c;
 
-	while ((c = getopt(argc, argv, ":i:c:?")) != -1)
+	while ((c = getopt_long(argc, argv, ":i:c:?", long_options, NULL)) != -1)
 	{
 		switch (c)
 		{
