@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
+#include <ctype.h>
 
 typedef struct coords
 {
@@ -20,12 +21,10 @@ static int compare(const void *a, const void *b)
 {
 	if (((Coords *)a)->x < ((Coords *)b)->x)
 		return -1;
-	if (((Coords *)a)->x == ((Coords *)b)->x)
-		return 0;
 	if (((Coords *)a)->x > ((Coords *)b)->x)
 		return 1;
-	fprintf(stderr, "Unknown Comparison");
-	exit(0);
+
+	return 0;
 }
 
 static double linear_inter(Coords_Array coords_array, double input)
