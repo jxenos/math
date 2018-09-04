@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-//#include <unistd.h>
 #include <getopt.h>
 #include <ctype.h>
 
@@ -176,30 +175,30 @@ int main(int argc, char **argv)
 
 	if (help || argc < 2)
 	{
-		printf("This program runs a basic linear interpolator. \n\nYou must provide it with a --csv (-c) and an --input (-i) in order to execute.  The input is your desired interpolation.\n\nA brief overview:\nThis program requires the interpolation to be within the confines of the data provided to it (it doesn't extrapolate).  The csv currently requires ',' as a delimiter, though in the future this may be changed to default to comma and allow you to pass in a char (or even string) as an option (--delimiter, -d).  The csv is not required to be sorted.  The input should eventually be moved from an option to a straight argument.\n\n");
+		printf("This program runs a basic linear interpolator. \n\n");
+		printf("You must provide it with a --csv (-c) and an --input (-i) in order to execute.  The input is your desired interpolation.\n\n");
+		printf("A brief overview:\n");
+		printf("This program requires the interpolation to be within the confines of the data provided to it (it doesn't extrapolate).  The csv currently requires ',' as a delimiter, though in the future this may be changed to default to comma and allow you to pass in a char (or even string) as an option (--delimiter, -d).  The csv is not required to be sorted.  The input should eventually be moved from an option to a straight argument.\n\n");
+		return 0;
 	}
-	else if (camera_config != NULL && input_set == 1)
-	{
-		Coords_Array coords_array = csv_parser(camera_config);
 
-		double output = linear_inter(coords_array, input);
-
-		printf("%f\n", output);
-	}
-	else if (camera_config == NULL)
+	if (camera_config == NULL)
 	{
 		fprintf(stderr, "You must pass a csv file\n");
+		return -1;
 	}
-	else if (input_set == 0)
+	if (input_set == 0)
 	{
 		fprintf(stderr, "You must pass a target number\n");
-	}
-	else
-	{
-		fprintf(stderr, "An unknown error has occured\n");
+		return -1;
 	}
 
-	free(coords_array);
+	Coords_Array coords_array = csv_parser(camera_config);
+	double output = linear_inter(coords_array, input);
+
+	printf("%f\n", output);
+
+	free(coords_array.coords_array);
 	free(camera_config);
 
 	return 0;
