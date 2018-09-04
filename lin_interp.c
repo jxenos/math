@@ -198,5 +198,9 @@ int main(int argc, char **argv)
 	{
 		fprintf(stderr, "An unknown error has occured\n");
 	}
+
+	free(coords_array);
+	free(camera_config);
+
 	return 0;
 }
